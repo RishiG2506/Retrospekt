@@ -42,6 +42,7 @@ public class TweetController {
 //        return ResponseEntity.ok(savedTweet);
 //    }
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<Tweet> postReq(@RequestBody Tweet tweet) {
         System.out.println("Post API Called");
