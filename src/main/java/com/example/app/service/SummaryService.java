@@ -14,11 +14,11 @@ public class SummaryService {
 //    private String API_KEY;
 
     private ChatLanguageModel mistralAiModel;
-
+//    private ChatLanguageModel geminiModel;
     private final SummaryAgent agent;
 
 
-    public SummaryService(@Value("${app.api_key}") String API_KEY){
+    public SummaryService(@Value("${spring.ai.mistralai.api-key}") String API_KEY){
         mistralAiModel = MistralAiChatModel.builder()
                 .apiKey(API_KEY)
                 .modelName(MistralAiChatModelName.MISTRAL_MEDIUM_LATEST)

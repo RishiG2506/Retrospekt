@@ -48,7 +48,8 @@ public class TweetController {
         System.out.println("Post API Called");
         String summary = summaryService.summary(tweet);
         tweet.setContent(summary);
-        return ResponseEntity.ok(tweet);
+        Tweet savedTweet = tweetRepository.save(tweet);
+        return ResponseEntity.ok(savedTweet);
     }
 
 //    String summarizeTweet(Tweet tweet){

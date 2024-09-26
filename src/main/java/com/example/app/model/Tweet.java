@@ -1,9 +1,6 @@
 package com.example.app.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Tweet {
@@ -13,6 +10,7 @@ public class Tweet {
     private Long id;
     private String url;
     private String author;
+    @Lob
     private String content;
 
     // Constructors
