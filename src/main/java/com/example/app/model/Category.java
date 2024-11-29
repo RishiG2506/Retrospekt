@@ -1,0 +1,12 @@
+package com.example.app.model;
+
+public enum Category {
+    TECHNOLOGY,
+    EDUCATION_AND_CAREER,
+    HEALTH_AND_WELLNESS,
+    BUSINESS_AND_FINANCE,
+    ENTERTAINMENT_AND_LIFESTYLE,
+    NEWS_AND_POLITICS,
+    HUMOR_AND_MEMES,
+    OTHERS
+}

@@ -1,5 +1,6 @@
 package com.example.app.controller;
 
+import com.example.app.model.Category;
 import com.example.app.model.Tweet;
 import com.example.app.repository.TweetRepository;
 import com.example.app.service.SummaryService;
@@ -34,18 +35,10 @@ public class TweetController {
         return tweetRepository.findAll();
     }
 
-//    @PostMapping
-//    public ResponseEntity<Tweet> createTweet(@RequestBody Tweet tweet) {
-//        String summary = summarizeTweet(tweet);
-//        tweet.setContent(summary);
-//        Tweet savedTweet = tweetRepository.save(tweet);
-//        return ResponseEntity.ok(savedTweet);
-//    }
-
     @CrossOrigin
     @PostMapping
     public ResponseEntity<Tweet> postReq(@RequestBody Tweet tweet) {
-        System.out.println("Post API Called");
+        System.out.println("Post API 1 Called");
         String summary = summaryService.summary(tweet);
         tweet.setContent(summary);
         Tweet savedTweet = tweetRepository.save(tweet);
@@ -58,4 +51,19 @@ public class TweetController {
 //        System.out.println(result);
 //        return result;
 //    }
+
+    @PostMapping("/categoryV1")
+    public ResponseEntity<String> category(@RequestBody Tweet tweet){
+        String category = summaryService.categorizeV1(tweet);
+        return ResponseEntity.ok(category);
+    }
+
+    @PostMapping("/categoryV2")
+    public ResponseEntity<Category> categoryV2(@RequestBody Tweet tweet){
+        Category category = summaryService.categorizeV2(tweet);
+        if(category instanceof Category){
+            System.out.println("Enum returned");
+        }
+        return ResponseEntity.ok(category);
+    }
 }
