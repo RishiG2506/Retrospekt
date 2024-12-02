@@ -9,4 +9,4 @@ public enum Category {
     NEWS_AND_POLITICS,
     HUMOR_AND_MEMES,
     OTHERS
-}
+} 
