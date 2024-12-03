@@ -40,8 +40,8 @@ public class TweetController {
         System.out.println("Post API 1 Called");
         String summary = summaryService.summary(tweet);
         tweet.setContent(summary);
-        Tweet savedTweet = tweetRepository.save(tweet);
-        return ResponseEntity.ok(savedTweet);
+        // Tweet savedTweet = tweetRepository.save(tweet);
+        return ResponseEntity.ok(tweet);
     }
 
     @PostMapping("/categoryV1")
@@ -58,4 +58,10 @@ public class TweetController {
         }
         return ResponseEntity.ok(category);
     }
+
+    // @PostMapping("/RAG")
+    // public ResponseEntity<List<String>> getQueries(@RequestBody Tweet tweet){
+    //     List<String> prompts = summaryService.getPrompts(tweet);
+    //     return ResponseEntity.ok(prompts);
+    // }
 }

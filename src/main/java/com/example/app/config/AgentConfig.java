@@ -31,4 +31,9 @@ public class AgentConfig {
         return AiServices.create(CategorizerAgent.class, openAILanguageModel());
     }
 
+    @Bean
+    public QueryEnhancedRAGAgent queryEnhancedRAGAgent(){
+        return AiServices.create(QueryEnhancedRAGAgent.class, openAILanguageModel());
+    }
+
 }
