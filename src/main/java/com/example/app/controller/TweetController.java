@@ -1,9 +1,10 @@
 package com.example.app.controller;
 
 import com.example.app.model.Category;
-import com.example.app.model.Tweet;
+import com.example.app.model.ContentItemRequest;
 import com.example.app.repository.TweetRepository;
 import com.example.app.service.CategorizerService;
+import com.example.app.service.RecommendationService;
 import com.example.app.service.SummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,40 +29,43 @@ public class TweetController {
     @Autowired
     private CategorizerService categorizerService;
 
+    @Autowired
+    private RecommendationService recommendationService;
+
 
     @GetMapping
-    public List<Tweet> getAllTweets() {
+    public List<ContentItemRequest> getAllItems() {
         return tweetRepository.findAll();
     }
 
     @CrossOrigin
     @PostMapping
-    public ResponseEntity<Tweet> postReq(@RequestBody Tweet tweet) {
+    public ResponseEntity<ContentItemRequest> postReq(@RequestBody ContentItemRequest contentItemRequest) {
         System.out.println("Post API 1 Called");
-        String summary = summaryService.summary(tweet);
-        tweet.setContent(summary);
+        String summary = summaryService.summary(contentItemRequest);
+        contentItemRequest.setContent(summary);
         // Tweet savedTweet = tweetRepository.save(tweet);
-        return ResponseEntity.ok(tweet);
+        return ResponseEntity.ok(contentItemRequest);
     }
 
     @PostMapping("/categoryV1")
-    public ResponseEntity<String> category(@RequestBody Tweet tweet){
-        String category = categorizerService.categorizeV1(tweet);
+    public ResponseEntity<String> category(@RequestBody ContentItemRequest contentItemRequest){
+        String category = categorizerService.categorizeV1(contentItemRequest);
         return ResponseEntity.ok(category);
     }
 
     @PostMapping("/categoryV2")
-    public ResponseEntity<Category> categoryV2(@RequestBody Tweet tweet){
-        Category category = categorizerService.categorizeV2(tweet);
+    public ResponseEntity<Category> categoryV2(@RequestBody ContentItemRequest contentItemRequest){
+        Category category = categorizerService.categorizeV2(contentItemRequest);
         if(category instanceof Category){
             System.out.println("Enum returned");
         }
         return ResponseEntity.ok(category);
     }
 
-    // @PostMapping("/RAG")
-    // public ResponseEntity<List<String>> getQueries(@RequestBody Tweet tweet){
-    //     List<String> prompts = summaryService.getPrompts(tweet);
-    //     return ResponseEntity.ok(prompts);
-    // }
+    @PostMapping("/RAG")
+    public ResponseEntity<List<String>> getQueries(@RequestBody ContentItemRequest contentItemRequest){
+        List<String> recommendations = recommendationService.getRecommendations(contentItemRequest);
+        return ResponseEntity.ok(recommendations);
+    }
 }

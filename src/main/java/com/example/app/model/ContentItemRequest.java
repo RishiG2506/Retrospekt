@@ -1,22 +1,16 @@
 package com.example.app.model;
 
-import jakarta.persistence.*;
+public class ContentItemRequest {
 
-@Entity
-public class Tweet {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String url;
     private String author;
-    @Lob
     private String content;
 
     // Constructors
-    public Tweet() {}
+    public ContentItemRequest() {}
 
-    public Tweet(String url, String author, String content) {
+    public ContentItemRequest(String url, String author, String content) {
         this.url = url;
         this.author = author;
         this.content = content;

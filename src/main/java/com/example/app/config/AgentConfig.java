@@ -36,4 +36,9 @@ public class AgentConfig {
         return AiServices.create(QueryEnhancedRAGAgent.class, openAILanguageModel());
     }
 
+    @Bean
+    public RecommendationAgent recommendationAgent(){
+        return AiServices.create(RecommendationAgent.class, openAILanguageModel());
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.example.app.config;
 
-import java.util.List;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
