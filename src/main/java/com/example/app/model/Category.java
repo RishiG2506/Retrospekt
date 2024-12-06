@@ -8,5 +8,21 @@ public enum Category {
     ENTERTAINMENT_AND_LIFESTYLE,
     NEWS_AND_POLITICS,
     HUMOR_AND_MEMES,
-    OTHERS
+    OTHERS;
+
+    public static String getCategoryString(Category category) {
+        if (category == null) {
+            return null;
+        }
+        return switch (category) {
+            case TECHNOLOGY -> "Technology";
+            case HEALTH_AND_WELLNESS -> "Health and Wellness";
+            case EDUCATION_AND_CAREER -> "Education and Career";
+            case ENTERTAINMENT_AND_LIFESTYLE -> "Entertainment and Lifestyle";
+            case NEWS_AND_POLITICS -> "News and Politics";
+            case HUMOR_AND_MEMES -> "Humor and Memes";
+            case OTHERS-> "Other";
+            default -> "Unknown Category";
+        };
+    }
 } 

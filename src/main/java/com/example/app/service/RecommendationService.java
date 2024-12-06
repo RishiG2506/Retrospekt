@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.app.config.RecommendationAgent;
 import com.example.app.config.RecommendationRAGAgent;
+import com.example.app.model.Category;
 import com.example.app.model.ContentItemRequest;
 
 @Service
@@ -21,8 +22,7 @@ public class RecommendationService {
         this.recommendationRAGAgent = recommendationRAGAgent;
     }
 
-    public List<String> getRecommendations(ContentItemRequest tweet){
-        String category = "News and Politics";
+    public List<String> recommendations(ContentItemRequest tweet, String category){
         List<String> ragList = recommendationRAGAgent.recommend(tweet.getContent(), category);
         List<String> nonragList = recommendationAgent.recommend(tweet.getContent(), category);
         return Stream.concat(ragList.stream(), nonragList.stream())

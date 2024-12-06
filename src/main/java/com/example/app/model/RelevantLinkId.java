@@ -1,5 +1,6 @@
 package com.example.app.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,7 +8,10 @@ import java.util.Objects;
 @Embeddable
 public class RelevantLinkId implements Serializable {
 
+    @Column(name = "content_item_id")
     private Long contentItemId;
+
+    @Column(name = "relevant_url")
     private String url;
 
     // Default constructor

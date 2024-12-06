@@ -1,5 +1,7 @@
 package com.example.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,7 +12,8 @@ public class RelevantLink {
     private RelevantLinkId id;  // Using composite key
 
     @ManyToOne
-    @JoinColumn(name = "content_item_id", insertable = false, updatable = false)
+    @MapsId("contentItemId")
+    @JsonIgnore
     private ContentItem contentItem;  // Many-to-one relationship
 
 
@@ -18,7 +21,7 @@ public class RelevantLink {
     public RelevantLink() {}
 
     // Constructor with fields
-    public RelevantLink(RelevantLinkId id, ContentItem contentItem, String description) {
+    public RelevantLink(RelevantLinkId id, ContentItem contentItem) {
         this.id = id;
         this.contentItem = contentItem;
     }

@@ -18,8 +18,6 @@ public class SummaryService {
 
     @Autowired
     public SummaryService(SummaryAgent summaryAgent, QueryEnhancedRAGAgent queryEnhancedRAGAgent){
-        String dir = System.getProperty("user.dir");
-        System.out.println(dir);
         this.summaryAgent = summaryAgent;
         this.queryEnhancedRAGAgent = queryEnhancedRAGAgent;
     }
@@ -37,7 +35,7 @@ public class SummaryService {
             String response = queryEnhancedRAGAgent.enhancedRAGResponse(prompt, contentItemRequest.getContent());
             enhancedRAGContext += "Query: " + prompt + "\n" + "Response:" + response + "\n";
         }
-        System.out.println(enhancedRAGContext);
+        // System.out.println(enhancedRAGContext);
         return enhancedRAGContext;
     }
 

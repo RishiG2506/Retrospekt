@@ -15,9 +15,6 @@ public class ContentItem {
     @Column(name = "url", nullable = false)
     private String url;
 
-    @Column(name = "title", nullable = false)
-    private String title;
-
     @Column(name = "category", nullable = false)
     private String category;
 
@@ -35,9 +32,8 @@ public class ContentItem {
     public ContentItem() {
     }
 
-    public ContentItem(String url, String title, String category, String author, String summary) {
+    public ContentItem(String url, String category, String author, String summary) {
         this.url = url;
-        this.title = title;
         this.category = category;
         this.author = author;
         this.summary = summary;
@@ -59,14 +55,6 @@ public class ContentItem {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getCategory() {
@@ -101,15 +89,15 @@ public class ContentItem {
         this.relevantLinks = relevantLinks;
     }
 
-    // public void addRelevantLink(RelevantLink relevantLink) {
-    //     relevantLinks.add(relevantLink);
-    //     relevantLink.setContentItem(this);
-    // }
+    public void addRelevantLink(RelevantLink relevantLink) {
+        relevantLinks.add(relevantLink);
+        // relevantLink.setContentItem(this);
+    }
 
-    // public void removeRelevantLink(RelevantLink relevantLink) {
-    //     relevantLinks.remove(relevantLink);
-    //     relevantLink.setContentItem(null);
-    // }
+    public void removeRelevantLink(RelevantLink relevantLink) {
+        relevantLinks.remove(relevantLink);
+        relevantLink.setContentItem(null);
+    }
 
     // toString (optional)
     @Override
@@ -117,7 +105,6 @@ public class ContentItem {
         return "ContentItem{" +
                 "id=" + id +
                 ", url='" + url + '\'' +
-                ", title='" + title + '\'' +
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
                 ", summary='" + summary + '\'' +

@@ -1,5 +1,8 @@
 package com.example.app.model;
 
+// import jakarta.persistence.Entity;
+
+// @Entity
 public class ContentItemRequest {
 
     private Long id;
