@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.app.config.RecommendationAgent;
 import com.example.app.config.RecommendationRAGAgent;
-import com.example.app.model.Category;
 import com.example.app.model.ContentItemRequest;
 
 @Service

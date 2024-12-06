@@ -1,6 +1,5 @@
 package com.example.app.config;
 
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

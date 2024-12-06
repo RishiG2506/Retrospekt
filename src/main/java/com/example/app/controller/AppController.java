@@ -1,15 +1,9 @@
 package com.example.app.controller;
 
-import com.example.app.model.Category;
 import com.example.app.model.ContentItem;
 import com.example.app.model.ContentItemRequest;
-import com.example.app.repository.ContentItemRepository;
 import com.example.app.service.AppService;
-import com.example.app.service.CategorizerService;
-import com.example.app.service.RecommendationService;
-import com.example.app.service.SummaryService;
 
-import dev.ai4j.openai4j.chat.Content;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/content")
-public class TweetController {
+public class AppController {
 
     @Autowired
     private AppService appService;
