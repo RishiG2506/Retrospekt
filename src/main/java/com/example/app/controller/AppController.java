@@ -4,6 +4,7 @@ import com.example.app.model.ContentItem;
 import com.example.app.model.ContentItemRequest;
 import com.example.app.service.AppService;
 
+import dev.ai4j.openai4j.chat.Content;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,13 @@ public class AppController {
         System.out.println("Main Post API Called");
         ContentItem savedItem = appService.service(contentItemRequest);
         return ResponseEntity.ok(savedItem);
+    }
+
+    @CrossOrigin
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<ContentItem>> getContentItemsByCategory(@PathVariable String category){
+        List<ContentItem> contentItems = appService.getItemsByCategory(category);
+        return ResponseEntity.ok(contentItems);
     }
 
     // @PostMapping("/categoryV1")

@@ -73,5 +73,9 @@ public class AppService {
         return relevantLinkRepository.findUrlsByContentItemId(contentItemId);
     }
 
+    public List<ContentItem> getItemsByCategory(String Category){
+        return contentItemRepository.findByCategory(Category);
+    }
+
 
 }

@@ -21,7 +21,7 @@ public enum Category {
             case ENTERTAINMENT_AND_LIFESTYLE -> "Entertainment and Lifestyle";
             case NEWS_AND_POLITICS -> "News and Politics";
             case HUMOR_AND_MEMES -> "Humor and Memes";
-            case OTHERS-> "Other";
+            case OTHERS-> "Others";
             default -> "Unknown Category";
         };
     }
