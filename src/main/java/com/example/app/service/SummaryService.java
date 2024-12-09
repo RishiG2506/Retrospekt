@@ -34,7 +34,6 @@ public class SummaryService {
             String response = queryEnhancedRAGAgent.enhancedRAGResponse(prompt, contentItemRequest.getContent());
             enhancedRAGContext += "Query: " + prompt + "\n" + "Response:" + response + "\n";
         }
-        // System.out.println(enhancedRAGContext);
         return enhancedRAGContext;
     }
 

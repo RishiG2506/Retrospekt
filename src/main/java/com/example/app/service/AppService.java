@@ -2,6 +2,8 @@ package com.example.app.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import com.example.app.repository.RelevantLinkRepository;
 
 @Service
 public class AppService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppService.class);
 
     @Autowired
     private SummaryService summaryService;
@@ -43,22 +47,22 @@ public class AppService {
         ContentItem contentItem = new ContentItem(contentItemRequest.getUrl(), categoryString, contentItemRequest.getAuthor(), summary);
 
         ContentItem savedItem = contentItemRepository.save(contentItem);
-        System.out.println("URLS:");
+
         for(String url: recommendations){
-            System.out.println(url);
-            RelevantLinkId relevantLinkID = new RelevantLinkId(savedItem.getId(), url);
-            if (relevantLinkRepository.existsById(relevantLinkID))
-                continue;
+            try{
+                RelevantLinkId relevantLinkID = new RelevantLinkId(savedItem.getId(), url);
+                if (relevantLinkRepository.existsById(relevantLinkID))
+                    continue;
 
-            RelevantLink relevantLink = relevantLinkRepository.findById(relevantLinkID)
-                      .orElse(new RelevantLink(relevantLinkID, savedItem));
+                RelevantLink relevantLink = relevantLinkRepository.findById(relevantLinkID)
+                        .orElse(new RelevantLink(relevantLinkID, savedItem));
 
-            if (!savedItem.getRelevantLinks().contains(relevantLink)) {
-                savedItem.addRelevantLink(relevantLink);
+                if (!savedItem.getRelevantLinks().contains(relevantLink)) {
+                    savedItem.addRelevantLink(relevantLink);
+                }
+            } catch(Exception e){
+                logger.info(e.getMessage());
             }
-
-            // RelevantLink relevantLink = new RelevantLink(relevantLinkID, savedItem);
-            // savedItem.addRelevantLink(relevantLink);
         }
 
         return contentItemRepository.save(savedItem);

@@ -4,8 +4,8 @@ import com.example.app.model.ContentItem;
 import com.example.app.model.ContentItemRequest;
 import com.example.app.service.AppService;
 
-import dev.ai4j.openai4j.chat.Content;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/content")
 public class AppController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppController.class);
 
     @Autowired
     private AppService appService;
@@ -36,8 +38,8 @@ public class AppController {
     @CrossOrigin
     @PostMapping
     public ResponseEntity<ContentItem> processContent(@RequestBody ContentItemRequest contentItemRequest){
-        System.out.println("Main Post API Called");
         ContentItem savedItem = appService.service(contentItemRequest);
+        logger.info("Content Saved into Database");
         return ResponseEntity.ok(savedItem);
     }
 
@@ -47,20 +49,5 @@ public class AppController {
         List<ContentItem> contentItems = appService.getItemsByCategory(category);
         return ResponseEntity.ok(contentItems);
     }
-
-    // @PostMapping("/categoryV1")
-    // public ResponseEntity<String> category(@RequestBody ContentItemRequest contentItemRequest){
-    //     String category = categorizerService.categorizeV1(contentItemRequest);
-    //     return ResponseEntity.ok(category);
-    // }
-
-    // @PostMapping("/categoryV2")
-    // public ResponseEntity<Category> categoryV2(@RequestBody ContentItemRequest contentItemRequest){
-    //     Category category = categorizerService.categorizeV2(contentItemRequest);
-    //     if(category instanceof Category){
-    //         System.out.println("Enum returned");
-    //     }
-    //     return ResponseEntity.ok(category);
-    // }
 
 }

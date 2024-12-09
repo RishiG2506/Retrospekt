@@ -1,13 +1,20 @@
 package com.example.app.config;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.DocumentParser;
@@ -35,10 +42,12 @@ import static dev.langchain4j.data.document.loader.FileSystemDocumentLoader.load
 @Configuration
 public class EmbeddingConfig {
 
-    private static final String knowledgeBase = System.getProperty("user.dir") + "/src/main/resources/KnowledgeBase/";
-
+    private static final Logger logger = LoggerFactory.getLogger(EmbeddingConfig.class);
 
     private final ChatLanguageModel openAILanguageModel;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @Autowired
     public EmbeddingConfig (ChatLanguageModel openAILanguageModel){
@@ -116,41 +125,84 @@ public class EmbeddingConfig {
 
     @Bean(name = "educationAndCareerEmbeddingStore")
     public EmbeddingStore<TextSegment> educationAndCareerEmbeddingStore(){
-        String filename = knowledgeBase + "EducationAndCareer.txt";
-        return embed(filename, embeddingModel());
+        // String filename = knowledgeBase + "EducationAndCareer.txt";
+        try{
+            Path filePath = getFilePath("EducationAndCareer.txt");
+            return embed(filePath, embeddingModel());
+        }
+        catch(Exception e){
+            logger.info(e.getMessage());
+        }
+        return null;
     }
 
     @Bean(name = "entertainmentAndLifestyleEmbeddingStore")
     public EmbeddingStore<TextSegment> entertainmentAndLifestyleEmbeddingStore(){
-        String filename = knowledgeBase + "EntertainmentAndLifestyle.txt";
-        return embed(filename, embeddingModel());
+        // String filename = knowledgeBase + "EntertainmentAndLifestyle.txt";
+        try{
+            Path filePath = getFilePath("EntertainmentAndLifestyle.txt");
+            return embed(filePath, embeddingModel());
+        }
+        catch(Exception e){
+            logger.info(e.getMessage());
+        }
+        return null;
     }
 
     @Bean(name = "healthAndWellnessEmbeddingStore")
     public EmbeddingStore<TextSegment> healthAndWellnessEmbeddingStore(){
-        String filename = knowledgeBase + "HealthAndWellness.txt";
-        return embed(filename, embeddingModel());
+        // String filename = knowledgeBase + "HealthAndWellness.txt";
+        try{
+            Path filePath = getFilePath("HealthAndWellness.txt");
+            return embed(filePath, embeddingModel());
+        }
+        catch(Exception e){
+            logger.info(e.getMessage());
+        }
+        return null;
     }
 
     @Bean(name = "humorAndMemesEmbeddingStore")
     public EmbeddingStore<TextSegment> humorAndMemesEmbeddingStore(){
-        String filename = knowledgeBase + "HumorAndMemes.txt";
-        return embed(filename, embeddingModel());
+        // String filename = knowledgeBase + "HumorAndMemes.txt";
+        try{
+            Path filePath = getFilePath("HumorAndMemes.txt");
+            return embed(filePath, embeddingModel());
+        }
+        catch(Exception e){
+            logger.info(e.getMessage());
+        }
+        return null;
     }
 
     @Bean(name = "newsAndPoliticsEmbeddingStore")
     public EmbeddingStore<TextSegment> newsAndPoliticsEmbeddingStore(){
-        String filename = knowledgeBase + "NewsAndPolitics.txt";
-        return embed(filename, embeddingModel());
+        // String filename = knowledgeBase + "NewsAndPolitics.txt";
+        try{
+            Path filePath = getFilePath("NewsAndPolitics.txt");
+            return embed(filePath, embeddingModel());
+        }
+        catch(Exception e){
+            logger.info(e.getMessage());
+        }
+        return null;
     }
 
     @Bean(name = "technologyEmbeddingStore")
     public EmbeddingStore<TextSegment> technologyEmbeddingStore(){
-        String filename = knowledgeBase + "Technology.txt";
-        return embed(filename, embeddingModel());
+        // String filename = knowledgeBase + "Technology.txt";
+        try{
+            Path filePath = getFilePath("Technology.txt");
+            return embed(filePath, embeddingModel());
+        }
+        catch(Exception e){
+            logger.info(e.getMessage());
+        }
+        return null;
     }
 
-    private static EmbeddingStore<TextSegment> embed(String documentPath, EmbeddingModel embeddingModel) {
+
+    private static EmbeddingStore<TextSegment> embed(Path documentPath, EmbeddingModel embeddingModel) {
         DocumentParser documentParser = new TextDocumentParser();
         Document document = loadDocument(documentPath, documentParser);
 
@@ -162,6 +214,11 @@ public class EmbeddingConfig {
         EmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
         embeddingStore.addAll(embeddings, segments);
         return embeddingStore;
+    }
+
+    public Path getFilePath(String filename) throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:KnowledgeBase/" + filename);
+        return Paths.get(resource.getURI());
     }
 
 }
