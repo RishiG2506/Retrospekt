@@ -12,8 +12,11 @@ import com.example.app.model.ContentItem;
 
 @Repository
 public interface ContentItemRepository extends JpaRepository<ContentItem, Long> {
+
     List<ContentItem> findByCategory(String category);
 
     @Query("SELECT c FROM ContentItem c WHERE c.sent = false")
     List<ContentItem> findUnsentContent();
+
+    long countByCategory(String category);
 }

@@ -50,4 +50,11 @@ public class AppController {
         return ResponseEntity.ok(contentItems);
     }
 
+    @CrossOrigin
+    @GetMapping("category/count/{category}")
+    public ResponseEntity<Long> countContentItemsByCategory(@PathVariable String category){
+        long count = appService.countItemsByCategory(category);
+        return ResponseEntity.ok(count);
+    }
+
 }
