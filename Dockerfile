@@ -12,6 +12,8 @@ COPY --from=build /app/target/LLMApp.jar /app/LLMApp.jar
 
 VOLUME /data/h2db
 
+ENV USER_EMAIL=noreply.axis.intern24@gmail.com
+
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "LLMApp.jar"]

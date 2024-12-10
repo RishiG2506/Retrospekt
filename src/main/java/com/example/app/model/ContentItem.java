@@ -25,6 +25,9 @@ public class ContentItem {
     @Column(name = "summary")
     private String summary;
 
+    @Column(name = "sent")
+    private boolean sent;
+
     @OneToMany(mappedBy = "contentItem", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RelevantLink> relevantLinks = new HashSet<>();
 
@@ -37,6 +40,7 @@ public class ContentItem {
         this.category = category;
         this.author = author;
         this.summary = summary;
+        this.sent = false;
     }
 
     // Getters and Setters
@@ -79,6 +83,10 @@ public class ContentItem {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public void setEmailSent(){
+        this.sent = true;
     }
 
     public Set<RelevantLink> getRelevantLinks() {

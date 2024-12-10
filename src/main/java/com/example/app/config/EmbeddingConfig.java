@@ -125,7 +125,6 @@ public class EmbeddingConfig {
 
     @Bean(name = "educationAndCareerEmbeddingStore")
     public EmbeddingStore<TextSegment> educationAndCareerEmbeddingStore(){
-        // String filename = knowledgeBase + "EducationAndCareer.txt";
         try{
             Path filePath = getFilePath("EducationAndCareer.txt");
             return embed(filePath, embeddingModel());
@@ -138,7 +137,6 @@ public class EmbeddingConfig {
 
     @Bean(name = "entertainmentAndLifestyleEmbeddingStore")
     public EmbeddingStore<TextSegment> entertainmentAndLifestyleEmbeddingStore(){
-        // String filename = knowledgeBase + "EntertainmentAndLifestyle.txt";
         try{
             Path filePath = getFilePath("EntertainmentAndLifestyle.txt");
             return embed(filePath, embeddingModel());
@@ -151,7 +149,6 @@ public class EmbeddingConfig {
 
     @Bean(name = "healthAndWellnessEmbeddingStore")
     public EmbeddingStore<TextSegment> healthAndWellnessEmbeddingStore(){
-        // String filename = knowledgeBase + "HealthAndWellness.txt";
         try{
             Path filePath = getFilePath("HealthAndWellness.txt");
             return embed(filePath, embeddingModel());
@@ -164,7 +161,6 @@ public class EmbeddingConfig {
 
     @Bean(name = "humorAndMemesEmbeddingStore")
     public EmbeddingStore<TextSegment> humorAndMemesEmbeddingStore(){
-        // String filename = knowledgeBase + "HumorAndMemes.txt";
         try{
             Path filePath = getFilePath("HumorAndMemes.txt");
             return embed(filePath, embeddingModel());
@@ -177,7 +173,6 @@ public class EmbeddingConfig {
 
     @Bean(name = "newsAndPoliticsEmbeddingStore")
     public EmbeddingStore<TextSegment> newsAndPoliticsEmbeddingStore(){
-        // String filename = knowledgeBase + "NewsAndPolitics.txt";
         try{
             Path filePath = getFilePath("NewsAndPolitics.txt");
             return embed(filePath, embeddingModel());
@@ -190,7 +185,6 @@ public class EmbeddingConfig {
 
     @Bean(name = "technologyEmbeddingStore")
     public EmbeddingStore<TextSegment> technologyEmbeddingStore(){
-        // String filename = knowledgeBase + "Technology.txt";
         try{
             Path filePath = getFilePath("Technology.txt");
             return embed(filePath, embeddingModel());
