@@ -12,7 +12,7 @@ COPY --from=build /app/target/LLMApp.jar /app/LLMApp.jar
 
 VOLUME /data/h2db
 
-ENV USER_EMAIL=noreply.axis.intern24@gmail.com
+ENV USER_EMAIL=<user-email@example.com
 
 EXPOSE 8080
 
