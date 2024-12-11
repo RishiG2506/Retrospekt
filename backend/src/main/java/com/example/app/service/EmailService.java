@@ -45,7 +45,7 @@ public class EmailService {
         }
 
         // Building the email content
-        StringBuilder emailContent = new StringBuilder("Hello! Here is your recently saved content:\n\n");
+        StringBuilder emailContent = new StringBuilder("Hey There! Here's the content saved by you this week:\n\n");
         
         int counter = 1;
         for (ContentItem content : unsentContent) {
